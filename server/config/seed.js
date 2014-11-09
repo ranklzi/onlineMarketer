@@ -52,27 +52,22 @@ User.find({}).remove(function() {
 
 Campaign.find({}).remove(function() {
   Campaign.create({
-    name : 'Development Tools',
+    name : 'UFX UK',
     comment : 'Integration with popular tools such as Bower, Grunt, Karma, Mocha, JSHint, Node Inspector, Livereload, Protractor, Jade, Stylus, Sass, CoffeeScript, and Less.',
-    active : true
+    active : true,
+    enableRotation: false,
+    offers : [
+      {
+        name: "Google Offer",
+        url: "http://www.google.com"
+      }
+    ]
   }, {
-    name : 'Server and Client integration',
+    name : 'AnyOption AU',
     comment : 'Built with a powerful and fun stack: MongoDB, Express, AngularJS, and Node.',
     active : true
   }, {
-    name : 'Smart Build System',
-    comment : 'Build system ignores `spec` files, allowing you to keep tests alongside code. Automatic injection of scripts and styles into your index.html',
-    active : true
-  },  {
-    name : 'Modular Structure',
-    comment : 'Best practice client and server structures allow for more code reusability and maximum scalability',
-    active : true
-  },  {
-    name : 'Optimized Build',
-    comment : 'Build process packs up your templates as a single JavaScript payload, minifies your scripts/css/images, and rewrites asset names for caching.',
-    active : false
-  },{
-    name : 'Deployment Ready',
+    name : 'UBinary UK',
     comment : 'Easily deploy your app to Heroku or Openshift with the heroku and openshift subgenerators',
     active : false
   });
