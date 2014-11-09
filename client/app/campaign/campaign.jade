@@ -3,14 +3,86 @@ div(ng-include='"components/navbar/navbar.html"')
   p
     | The delete user and user index api routes are restricted to users with the 'admin' role.
   br
-  p
-    | Campaign Id: {{campaignId}}
-  ul.list-group
-    li.list-group-item(ng-repeat='user in users')
-      strong {{user.name}}
-      br
-      span.text-muted {{user.email}}
-      a.trash(ng-click='delete(user)')
-        span.glyphicon.glyphicon-trash.pull-right
-      br
-      span TestTest
+  div.container-fluid
+    div.row.list-group-item
+      div.col-md-6
+        span 
+        strong Campaign Id:
+      div.col-md-6
+        span {{campaign._id}}
+    div.row.list-group-item
+      div.col-md-6
+        span 
+        strong Name:
+      div.col-md-6
+        span {{campaign.name}}
+    div.row.list-group-item
+      div.col-md-6
+        span 
+        strong Active:
+      div.col-md-6
+        span {{campaign.active}}
+    div.row.list-group-item
+      div.col-md-6
+        span 
+        strong Comment:
+      div.col-md-6
+        span {{campaign.comment}}
+    div.row.list-group-item
+      div.col-md-6
+        span 
+        strong Campaign Group 1:
+      div.col-md-6
+        span aa1
+    div.row.list-group-item
+      div.col-md-6
+        span 
+        strong Campaign Group 2:
+      div.col-md-6
+        span aa2
+    div.row.list-group-item
+      div.col-md-6
+        span 
+        strong Campaign Group 3:
+      div.col-md-6
+        span aa3
+    div.row.list-group-item
+      div.col-md-6
+        span 
+        strong Traffic Source:
+      div.col-md-6
+        span bb
+    div.row.list-group-item
+      div.col-md-6
+        span 
+        strong Default CPC $:
+      div.col-md-6
+        span cc
+    div.row.list-group-item
+      div.col-md-6
+        span 
+        strong Campaign Type:
+      div.col-md-6
+        span dd
+    div.row.list-group-item
+      div.col-md-6
+        span 
+        strong Use Tokens:
+      div.col-md-6
+        span ee
+    div.row.list-group-item
+      div.col-md-6
+        span 
+        strong Sub Ids:
+      div.col-md-6
+        span url end or template
+  br
+  div.container-fluid
+    div.row.list-group-item
+      div.col-md-6
+        span 
+        strong Campaign Id:
+      div.col-md-6
+        span {{campaign._id}}
+
+  
