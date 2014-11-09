@@ -5,7 +5,7 @@ angular.module('onlineMarketerApp')
     $stateProvider
       .state('campaign', {
         url: '/campaign',
-        templateUrl: 'app/campaigns/campaign.html',
+        templateUrl: 'app/campaign/campaign.html',
         controller: 'CampaignCtrl'
       });
   });
