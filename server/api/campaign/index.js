@@ -5,11 +5,12 @@ var controller = require('./campaign.controller');
 
 var router = express.Router();
 
-router.get('/', controller.index);
-router.get('/:id', controller.show);
-router.post('/', controller.create);
-router.put('/:id', controller.update);
-router.patch('/:id', controller.update);
-router.delete('/:id', controller.destroy);
+router.get('/manage', controller.index);
+router.get('/manage/:id', controller.show);
+router.post('/manage', controller.create);
+router.put('/manage/:id', controller.update);
+router.patch('/manage/:id', controller.update);
+router.delete('/manage/:id', controller.destroy);
+router.get('/track/:id', controller.track);
 
 module.exports = router;

@@ -6,7 +6,11 @@ var mongoose = require('mongoose'),
 var CampaignSchema = new Schema({
   name: String,
   comment: String,
-  active: Boolean
+  active: Boolean,
+  defaultCpc: Number,
+  url: String,
+  enableRotation: Boolean,
+  offers: Array
 });
 
 module.exports = mongoose.model('Campaign', CampaignSchema);

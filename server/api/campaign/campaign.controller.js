@@ -63,6 +63,26 @@ exports.destroy = function(req, res) {
   });
 };
 
+//track campaign click
+exports.track = function(req, res) {
+  Campaign.findById(req.params.id, function (err, campaign) {
+    if (err) { return handleError(res, err); }
+    if(!campaign) { return res.send(404); }
+
+    console.log('tracking click................................................................');
+    
+    if (!campaign.offers || campaign.offers.length == 0) { return res.send(400); }
+
+    return res.redirect(campaign.offers[0].url);
+    //todo - redirect
+    // var updated = _.merge(thing, req.body);
+    // updated.save(function (err) {
+    //   if (err) { return handleError(res, err); }
+    //   return res.json(200, thing);
+    // });
+  });
+};
+
 function handleError(res, err) {
   return res.send(500, err);
 }

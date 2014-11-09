@@ -76,13 +76,44 @@ div(ng-include='"components/navbar/navbar.html"')
         strong Sub Ids:
       div.col-md-6
         span url end or template
-  br
-  div.container-fluid
     div.row.list-group-item
       div.col-md-6
         span 
-        strong Campaign Id:
+        strong Enable Rotation:
       div.col-md-6
-        span {{campaign._id}}
+        span {{campaign.enableRotation}}
+  br
+  div.container-fluid
+    div.row.list-group-item(ng-repeat='offer in campaign.offers')
+      div.col-md-12
+        div.container-fluid
+          div.row.list-group-item
+            div.col-md-4
+              span 
+              strong Offer Name:
+            div.col-md-4
+              span {{offer.name}}
+            div.col-md-2
+              span 
+              strong Active:
+            div.col-md-2
+              span {{offer.active}}
+          div.row.list-group-item
+            div.col-md-4
+              span 
+              strong Url:
+            div.col-md-8
+              span {{offer.url}}
+          div.row.list-group-item
+            div.col-md-3
+              span 
+              strong Payout $:
+            div.col-md-3
+              span {{offer.payout}}
+            div.col-md-3
+              span 
+              strong Split $:
+            div.col-md-3
+              span {{offer.split}}
 
   

@@ -50,25 +50,26 @@ User.find({}).remove(function() {
   );
 });
 
-Campaign.find({}).remove(function() {
-  Campaign.create({
-    name : 'UFX UK',
-    comment : 'Integration with popular tools such as Bower, Grunt, Karma, Mocha, JSHint, Node Inspector, Livereload, Protractor, Jade, Stylus, Sass, CoffeeScript, and Less.',
-    active : true,
-    enableRotation: false,
-    offers : [
-      {
-        name: "Google Offer",
-        url: "http://www.google.com"
-      }
-    ]
-  }, {
-    name : 'AnyOption AU',
-    comment : 'Built with a powerful and fun stack: MongoDB, Express, AngularJS, and Node.',
-    active : true
-  }, {
-    name : 'UBinary UK',
-    comment : 'Easily deploy your app to Heroku or Openshift with the heroku and openshift subgenerators',
-    active : false
-  });
-});
+// Campaign.find({}).remove(function() {
+//   console.log('db campaigns removed...............................................................................');
+//   Campaign.create({
+//     name : 'UFX UK',
+//     comment : 'Integration with popular tools such as Bower, Grunt, Karma, Mocha, JSHint, Node Inspector, Livereload, Protractor, Jade, Stylus, Sass, CoffeeScript, and Less.',
+//     active : true,
+//     enableRotation: false,
+//     offers : [
+//       {
+//         name: "Google Offer",
+//         url: "http://www.google.com"
+//       }
+//     ]
+//   }, {
+//     name : 'AnyOption AU',
+//     comment : 'Built with a powerful and fun stack: MongoDB, Express, AngularJS, and Node.',
+//     active : true
+//   }, {
+//     name : 'UBinary UK',
+//     comment : 'Easily deploy your app to Heroku or Openshift with the heroku and openshift subgenerators',
+//     active : false
+//   });
+// });
