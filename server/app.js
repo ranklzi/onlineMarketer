@@ -31,19 +31,7 @@ var server = require('http').createServer(app);
 require('./config/express')(app);
 require('./routes')(app);
 
-var Sequelize = require('sequelize')
-  , sequelize = new Sequelize('onlineMarketer', 'postgres', '', {
-      dialect: "postgres",
-      port:    5432,
-    });
-
-
-var User = sequelize.define('User', {
-  username: Sequelize.STRING,
-  password: Sequelize.STRING
-});
-
-sequelize
+models.sequelize
   .sync({ force: true })
   .complete(function(err) {
      if (!!err) {
