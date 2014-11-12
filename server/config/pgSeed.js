@@ -17,13 +17,23 @@ Campaign.findAll().then(function(campaigns) {
 		Campaign.bulkCreate([
 			{
 				name : 'UFX UK',     comment : 'Integration with popular tools such as Bower, Grunt, Karma, Mocha, JSHint, Node Inspector, Livereload, Protractor, Jade, Stylus, Sass, CoffeeScript, and Less.',
-			   	//active : true,
-			   	//enableRotation: false,
-			   	// offers : [
-			    // {
-			    //      name: "Google Offer",
-			    //      url: "http://www.google.com"       }
-			    // ]
+			   	active : true,
+			   	enableRotation: false,
+			   	offers : [
+			    JSON.stringify({
+			         name: "Google Offer",
+			         url: "http://www.google.com"       })
+			    ]
+			},
+			{
+				name : 'Ubinary UK',     comment : 'not to go beyond 15 per day',
+			   	active : true,
+			   	enableRotation: false,
+			   	offers : [
+			    JSON.stringify({
+			         name: "Google Offer",
+			         url: "http://www.google.com"       })
+			    ]
 			}]);
 	});
 

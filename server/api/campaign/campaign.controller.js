@@ -11,27 +11,28 @@
 
 var _ = require('lodash');
 var models = require('../../models');
+var services = require('../../services');
 var Campaign = models.campaign;//require('./campaign.model');
 
 // Get list of things
 exports.index = function(req, res) {
-  Campaign.find(function (err, things) {
-    if(err) { return handleError(res, err); }
-    return res.json(200, things);
+  Campaign.findAll().then(function (campaigns) {
+    return res.json(200, campaigns);
   });
 };
 
-// Get a single thing
+// Get a single campaign
 exports.show = function(req, res) {
-  Campaign.findById(req.params.id, function (err, thing) {
-    if(err) { return handleError(res, err); }
-    if(!thing) { return res.send(404); }
-    return res.json(thing);
+Campaign.find({ where: {id: req.params.id} }).success(function(campaign) {
+    if(!campaign) { return res.send(404); }
+
+    return res.json(campaign);
   });
 };
 
 // Creates a new thing in the DB.
 exports.create = function(req, res) {
+  console.log(services.generateGuid + ' ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
   Campaign.create(req.body, function(err, thing) {
     if(err) { return handleError(res, err); }
     return res.json(201, thing);
@@ -40,11 +41,11 @@ exports.create = function(req, res) {
 
 // Updates an existing thing in the DB.
 exports.update = function(req, res) {
-  if(req.body._id) { delete req.body._id; }
-  Campaign.findById(req.params.id, function (err, thing) {
-    if (err) { return handleError(res, err); }
-    if(!thing) { return res.send(404); }
-    var updated = _.merge(thing, req.body);
+  if(req.body.id) { delete req.body.id; }
+
+  Campaign.find({ where: {id: req.params.id} }).success(function(campaign) {
+    if(!campaign) { return res.send(404); }
+    var updated = _.merge(campaign, req.body);
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
       return res.json(200, thing);

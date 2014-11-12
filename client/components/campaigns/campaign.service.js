@@ -2,6 +2,7 @@
 
 angular.module('onlineMarketerApp')
   .factory('Campaign', function ($resource) {
-    return $resource('/api/campaigns/manage/:id/:controller', { id: '@_id' },
-    	{ update : { method: 'PUT' } });
+    return $resource('/api/campaigns/manage/:id/', { id: '@id' },
+    	{ update : { method: 'PUT' }}
+    	);
   });
