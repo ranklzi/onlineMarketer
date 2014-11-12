@@ -115,5 +115,10 @@ div(ng-include='"components/navbar/navbar.html"')
               strong Split $:
             div.col-md-3
               span {{offer.split}}
+  div.container-fluid
+    div.row.list-group-item
+      div.col-md-6
+        button.btn.btn-inverse.btn-lg.btn-login(ng-click='save()')
+            | Save
 
   

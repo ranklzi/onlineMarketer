@@ -74,12 +74,6 @@ exports.track = function(req, res) {
     if (!campaign.offers || campaign.offers.length == 0) { return res.send(400); }
 
     return res.redirect(campaign.offers[0].url);
-    //todo - redirect
-    // var updated = _.merge(thing, req.body);
-    // updated.save(function (err) {
-    //   if (err) { return handleError(res, err); }
-    //   return res.json(200, thing);
-    // });
   });
 };
 

@@ -10,12 +10,7 @@ angular.module('onlineMarketerApp')
       $scope.campaign = campaign;
     });
 
-    $scope.delete = function(user) {
-      Campaign.remove({ id: user._id });
-      angular.forEach($scope.users, function(u, i) {
-        if (u === user) {
-          $scope.users.splice(i, 1);
-        }
-      });
+    $scope.save = function() {
+      $scope.campaign.$update();
     };
   });
