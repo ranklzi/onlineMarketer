@@ -1,12 +1,32 @@
 
 'use strict';
 
-//var app = require('../app');
-//console.log(app);
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-//var Campaign = require('../api/campaign/campaign.model');
-//var bookshelf = app.get('bookshelf');
+var models = require('../models');
+var Campaign = models.campaign;
 
-//var User = bookshelf.Model.extend({
-//  tableName: 'users'
-//});
+//delete all campaigns
+Campaign.findAll().then(function(campaigns) {
+	campaigns.forEach(function(campaign) {
+		campaign.destroy().then(function() {
+			
+		})
+	})
+}).then(function () {
+		Campaign.bulkCreate([
+			{
+				name : 'UFX UK',     comment : 'Integration with popular tools such as Bower, Grunt, Karma, Mocha, JSHint, Node Inspector, Livereload, Protractor, Jade, Stylus, Sass, CoffeeScript, and Less.',
+			   	//active : true,
+			   	//enableRotation: false,
+			   	// offers : [
+			    // {
+			    //      name: "Google Offer",
+			    //      url: "http://www.google.com"       }
+			    // ]
+			}]);
+	});
+
+
+
+

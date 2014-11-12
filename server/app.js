@@ -19,12 +19,6 @@ var _ = require('lodash');
 // Connect to database
 mongoose.connect(config.mongo.uri, config.mongo.options);
 
-// Populate DB with sample data
-if(config.seedDB) { 
-	require('./config/seed'); 
-	require('./config/pgseed'); 
-}
-
 // Setup server
 var app = express();
 var server = require('http').createServer(app);
@@ -38,8 +32,16 @@ models.sequelize
        console.log('An error occurred while creating the table:', err)
      } else {
        console.log('It worked!')
+       if(config.seedDB) { 
+       	require('./config/pgseed'); 
+       }
      }
   });
+
+  // Populate DB with sample data
+if(config.seedDB) { 
+	require('./config/seed'); 
+}
 
 // Start server
 server.listen(config.port, config.ip, function () {
