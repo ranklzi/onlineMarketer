@@ -1,18 +1,12 @@
 "use strict";
 
 module.exports = function(sequelize, DataTypes) {
-  var campaign = sequelize.define("campaign", {
+  var campaignGroup = sequelize.define("campaignGroup", {
     name: DataTypes.STRING,
   	comment: DataTypes.TEXT,
   	active: DataTypes.BOOLEAN,
-  	defaultCpc: DataTypes.FLOAT,
-  	url: DataTypes.STRING,
-  	enableRotation: DataTypes.BOOLEAN,
-  	offers: DataTypes.ARRAY(DataTypes.TEXT),
-    useTokens: DataTypes.BOOLEAN,
-    key: DataTypes.STRING
-  }
-  //, {
+  	type: DataTypes.INTEGER
+  }//, {
   //   classMethods: {
   //     associate: function(models) {
   //       campaign.hasMany(models.Task)
@@ -21,5 +15,5 @@ module.exports = function(sequelize, DataTypes) {
   //}
   );
 
-  return campaign;
+  return campaignGroup;
 };

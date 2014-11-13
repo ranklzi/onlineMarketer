@@ -30,16 +30,17 @@ Campaign.find({ where: {id: req.params.id} }).success(function(campaign) {
   });
 };
 
-// Creates a new thing in the DB.
+// Creates a new campaign in the DB.
 exports.create = function(req, res) {
-  console.log(services.generateGuid + ' ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
-  Campaign.create(req.body, function(err, thing) {
+  if(req.body.id) { delete req.body.id; }
+  req.body.key = services.guidGenerator.generateGuid();
+  Campaign.create(req.body, function(err, campaign) {
     if(err) { return handleError(res, err); }
-    return res.json(201, thing);
+    return res.json(201, campaign);
   });
 };
 
-// Updates an existing thing in the DB.
+// Updates an existing campaign in the DB.
 exports.update = function(req, res) {
   if(req.body.id) { delete req.body.id; }
 
@@ -53,7 +54,7 @@ exports.update = function(req, res) {
   });
 };
 
-// Deletes a thing from the DB.
+// Deletes a campaign from the DB.
 exports.destroy = function(req, res) {
   Campaign.findById(req.params.id, function (err, thing) {
     if(err) { return handleError(res, err); }

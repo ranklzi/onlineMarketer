@@ -5,23 +5,32 @@ div(ng-include='"components/navbar/navbar.html"')
   br
   div.container-fluid
     div.row.list-group-item
-      div.col-md-6
-        span 
-        strong Campaign Id:
-      div.col-md-6
-        span {{campaign._id}}
-    div.row.list-group-item
-      div.col-md-6
+      div.col-md-3
         span 
         strong Name:
-      div.col-md-6
+      div.col-md-3
         input(type="text" ng-model="campaign.name")
+      div.col-md-3
+        span 
+        strong Campaign Id:
+      div.col-md-3
+        span {{campaign.id}}
     div.row.list-group-item
-      div.col-md-6
+      div.col-md-1
         span 
         strong Active:
-      div.col-md-6
+      div.col-md-1
         input(type="checkbox" ng-model="campaign.active")
+      div.col-md-2
+        span 
+        strong Campaign Type:
+      div.col-md-2
+        span dd
+      div.col-md-3
+        span 
+        strong Key:
+      div.col-md-3
+        span {{campaign.key}}
     div.row.list-group-item
       div.col-md-6
         span 
@@ -29,22 +38,20 @@ div(ng-include='"components/navbar/navbar.html"')
       div.col-md-6
         input(type="text" ng-model="campaign.comment")
     div.row.list-group-item
-      div.col-md-6
+      div.col-md-2
         span 
         strong Campaign Group 1:
-      div.col-md-6
-        span tbd
-    div.row.list-group-item
-      div.col-md-6
+      div.col-md-2
+        span tbd    
+      div.col-md-2
         span 
         strong Campaign Group 2:
-      div.col-md-6
-        span tbd
-    div.row.list-group-item
-      div.col-md-6
+      div.col-md-2
+        span tbd    
+      div.col-md-2
         span 
         strong Campaign Group 3:
-      div.col-md-6
+      div.col-md-2
         span tbd
     div.row.list-group-item
       div.col-md-6
@@ -57,13 +64,7 @@ div(ng-include='"components/navbar/navbar.html"')
         span 
         strong Default CPC $:
       div.col-md-6
-        input(type="text" ng-model="campaign.defaultCpc")
-    div.row.list-group-item
-      div.col-md-6
-        span 
-        strong Campaign Type:
-      div.col-md-6
-        span dd
+        input(type="text" ng-model="campaign.defaultCpc")    
     div.row.list-group-item
       div.col-md-6
         span 
@@ -118,11 +119,5 @@ div(ng-include='"components/navbar/navbar.html"')
   div.container-fluid
     div.row.list-group-item
       div.col-md-6
-        button.btn.btn-inverse.btn-lg.btn-login(ng-click='update()')
+        button.btn.btn-inverse.btn-lg.btn-login(ng-click='save()')
             | Save
-    div.row.list-group-item
-      div.col-md-6
-        button.btn.btn-inverse.btn-lg.btn-login(ng-click='create()')
-            | Create
-
-  

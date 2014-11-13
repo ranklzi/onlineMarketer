@@ -1,7 +1,7 @@
 'use strict';
 
 
-var guid = (function() {
+var generateGuid = (function() {
   function s4() {
     return Math.floor((1 + Math.random()) * 0x10000)
                .toString(16)
@@ -12,5 +12,16 @@ var guid = (function() {
            s4() + '-' + s4() + s4() + s4();
   };
 });
+console.log('guiddddddddddddddddddddddddddd');
+console.log(generateGuid());
 
-exports.generateGuid = guid;
+exports.generateGuid = function() {
+	function s4() {
+    	return Math.floor((1 + Math.random()) * 0x10000)
+          	.toString(16)
+       		.substring(1);
+  	}
+
+  	return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+           s4() + '-' + s4() + s4() + s4();
+};

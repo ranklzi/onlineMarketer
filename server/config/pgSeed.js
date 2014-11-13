@@ -17,6 +17,7 @@ Campaign.findAll().then(function(campaigns) {
 		Campaign.bulkCreate([
 			{
 				name : 'UFX UK',     comment : 'Integration with popular tools such as Bower, Grunt, Karma, Mocha, JSHint, Node Inspector, Livereload, Protractor, Jade, Stylus, Sass, CoffeeScript, and Less.',
+				key : '9eb3d85fb594',
 			   	active : true,
 			   	enableRotation: false,
 			   	offers : [
@@ -28,6 +29,7 @@ Campaign.findAll().then(function(campaigns) {
 			{
 				name : 'Ubinary UK',     comment : 'not to go beyond 15 per day',
 			   	active : true,
+			   	key : '1cc9d85fb27a',
 			   	enableRotation: false,
 			   	offers : [
 			    JSON.stringify({

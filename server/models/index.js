@@ -12,7 +12,7 @@ var sequelize = new Sequelize(
 
 // load models
 var models = [
-  'campaign'
+  'campaign', 'campaignGroup'
 ];
 models.forEach(function(model) {
   console.log(__dirname + '/' + model);
