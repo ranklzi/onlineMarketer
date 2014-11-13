@@ -25,22 +25,10 @@ var server = require('http').createServer(app);
 require('./config/express')(app);
 require('./routes')(app);
 
-models.sequelize
-  .sync({ force: true })
-  .complete(function(err) {
-     if (!!err) {
-       console.log('An error occurred while creating the table:', err)
-     } else {
-       console.log('It worked!')
-       if(config.seedDB) { 
-       	require('./config/pgseed'); 
-       }
-     }
-  });
-
   // Populate DB with sample data
 if(config.seedDB) { 
 	require('./config/seed'); 
+  require('./config/pgseed');
 }
 
 // Start server

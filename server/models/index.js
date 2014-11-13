@@ -1,7 +1,6 @@
 var Sequelize = require('sequelize');
 var config = require('../config/environment');
 
-console.log(config.postgres + "#$%#%#$%#$%#$^$^$%$^");
 // initialize database connection
 var sequelize = new Sequelize(
   config.sequelize.dbname,
@@ -15,7 +14,7 @@ var models = [
   'campaign', 'campaignGroup'
 ];
 models.forEach(function(model) {
-  console.log(__dirname + '/' + model);
+  //console.log(__dirname + '/' + model);
   module.exports[model] = sequelize.import(__dirname + '/' + model);
 });
 
