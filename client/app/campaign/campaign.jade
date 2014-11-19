@@ -64,7 +64,7 @@ div(ng-include='"components/navbar/navbar.html"')
         span 
         strong Default CPC $:
       div.col-md-6
-        input(type="text" ng-model="campaign.defaultCpc")    
+        input(type="text" ng-model="campaign.defaultCpc")
     div.row.list-group-item
       div.col-md-6
         span 
@@ -93,29 +93,29 @@ div(ng-include='"components/navbar/navbar.html"')
               span 
               strong Offer Name:
             div.col-md-4
-              span {{offer.name}}
+              input(type="text" ng-model="offer.name")
             div.col-md-2
               span 
               strong Active:
             div.col-md-2
-              span {{offer.active}}
+              input(type="checkbox" ng-model="offer.active")
           div.row.list-group-item
             div.col-md-4
               span 
               strong Url:
             div.col-md-8
-              span {{offer.url}}
+              input(type="text" ng-model="offer.url")
           div.row.list-group-item
             div.col-md-3
               span 
               strong Payout $:
             div.col-md-3
-              span {{offer.payout}}
+              input(type="text" ng-model="offer.payout")
             div.col-md-3
               span 
-              strong Split $:
+              strong Split %:
             div.col-md-3
-              span {{offer.split}}
+              input(type="text" ng-model="offer.split")
   div.container-fluid
     div.row.list-group-item
       div.col-md-6

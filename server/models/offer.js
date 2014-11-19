@@ -3,7 +3,6 @@
 var models = require ('../models');
 
 module.exports = function(sequelize, DataTypes) {
-
   var offer = sequelize.define("offer", {
     id: {
       //primaryKey: true,
@@ -31,27 +30,7 @@ module.exports = function(sequelize, DataTypes) {
   //}
   );
 
-  var campaign = sequelize.define("campaign", {
-    id: DataTypes.INTEGER,
-    name: DataTypes.STRING,
-  	comment: DataTypes.TEXT,
-  	active: DataTypes.BOOLEAN,
-  	defaultCpc: DataTypes.FLOAT,
-  	url: DataTypes.STRING,
-  	enableRotation: DataTypes.BOOLEAN,
-  	useTokens: DataTypes.BOOLEAN,
-    key: DataTypes.STRING
-  }
-  //, {
-  //   classMethods: {
-  //     associate: function(models) {
-  //       campaign.hasMany(models.Task)
-  //     }
-  //  }
-  //}
-  );
+  //offer.hasOne(models.campaign, { foreignKey: 'id'});
 
-  campaign.hasMany(offer, { as: 'offers', foreignKey: 'campaignId'})
-
-  return campaign;
+  return offer;
 };

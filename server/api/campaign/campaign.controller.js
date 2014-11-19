@@ -12,18 +12,23 @@
 var _ = require('lodash');
 var models = require('../../models');
 var services = require('../../services');
+var campaignsDal = require('../../dal/campaignsDal');
 var Campaign = models.campaign;//require('./campaign.model');
 
-// Get list of things
+// Get the list of Campaigns
 exports.index = function(req, res) {
-  Campaign.findAll().then(function (campaigns) {
-    return res.json(200, campaigns);
+  campaignsDal.getCampaigns(function (campaigns) {
+    if(!campaigns) { return res.send(404); }
+
+    //console.log(campaigns);
+
+    return res.json(campaigns);
   });
 };
 
 // Get a single campaign
 exports.show = function(req, res) {
-Campaign.find({ where: {id: req.params.id} }).success(function(campaign) {
+  campaignsDal.getCampaign(req.params.id, function (campaign) {
     if(!campaign) { return res.send(404); }
 
     return res.json(campaign);
@@ -34,7 +39,8 @@ Campaign.find({ where: {id: req.params.id} }).success(function(campaign) {
 exports.create = function(req, res) {
   if(req.body.id) { delete req.body.id; }
   req.body.key = services.guidGenerator.generateGuid();
-  Campaign.create(req.body, function(err, campaign) {
+
+  campaignsDal.createCampaign(req.body, function(err, campaign) {
     if(err) { return handleError(res, err); }
     return res.json(201, campaign);
   });
@@ -43,26 +49,18 @@ exports.create = function(req, res) {
 // Updates an existing campaign in the DB.
 exports.update = function(req, res) {
   if(req.body.id) { delete req.body.id; }
+  campaignsDal.updateCampaign(req.params.id, req.body, function(err, campaign) {
+    if(err) { return handleError(res, err); }
 
-  Campaign.find({ where: {id: req.params.id} }).success(function(campaign) {
-    if(!campaign) { return res.send(404); }
-    var updated = _.merge(campaign, req.body);
-    updated.save(function (err) {
-      if (err) { return handleError(res, err); }
-      return res.json(200, thing);
-    });
+    return res.json(201, campaign);
   });
 };
 
 // Deletes a campaign from the DB.
 exports.destroy = function(req, res) {
-  Campaign.findById(req.params.id, function (err, thing) {
+  campaignsDal.deleteCampaign(req.params.id, function(err, campaign) {
     if(err) { return handleError(res, err); }
-    if(!thing) { return res.send(404); }
-    thing.remove(function(err) {
-      if(err) { return handleError(res, err); }
-      return res.send(204);
-    });
+    return res.json(201);
   });
 };
 

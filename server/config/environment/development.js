@@ -8,10 +8,14 @@ module.exports = {
     uri: 'mongodb://localhost/onlinemarketer-dev'
   },
 
+  postreg: {
+    connectionString: 'postgres://postgres:Kizi1980!@localhost:5432/onlineMarketer'
+  },
+
   sequelize: {
   	dbname: "onlineMarketer",
   	username: "postgres",
-  	password: "",
+  	password: "Kizi1980!",
   	options: {
       dialect: "postgres",
       port:    5432,

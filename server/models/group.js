@@ -1,7 +1,7 @@
 "use strict";
 
 module.exports = function(sequelize, DataTypes) {
-  var campaignGroup = sequelize.define("campaignGroup", {
+  var group = sequelize.define("group", {
     name: DataTypes.STRING,
   	comment: DataTypes.TEXT,
   	active: DataTypes.BOOLEAN,
@@ -15,5 +15,5 @@ module.exports = function(sequelize, DataTypes) {
   //}
   );
 
-  return campaignGroup;
+  return group;
 };

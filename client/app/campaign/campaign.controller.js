@@ -8,6 +8,7 @@ angular.module('onlineMarketerApp')
 
       // Use the User $resource to fetch all users
       Campaign.get({id: $scope.campaignId}, function (campaign) {
+        console.log(campaign);
          $scope.campaign = campaign;
       });
     }

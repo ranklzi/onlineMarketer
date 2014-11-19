@@ -11,7 +11,7 @@ var sequelize = new Sequelize(
 
 // load models
 var models = [
-  'campaign', 'campaignGroup'
+  'campaign', 'group', 'offer'
 ];
 models.forEach(function(model) {
   //console.log(__dirname + '/' + model);
