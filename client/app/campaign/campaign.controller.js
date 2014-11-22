@@ -39,5 +39,9 @@ angular.module('onlineMarketerApp')
         $scope.campaign.$update();
       }
     };
+
+    $scope.addOffer = function() {
+      $scope.campaign.offers.push({});
+    };
     
   });

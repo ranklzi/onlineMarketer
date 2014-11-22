@@ -84,6 +84,7 @@ div(ng-include='"components/navbar/navbar.html"')
       div.col-md-6
         input(type="checkbox" ng-model="campaign.useTokens")
   br
+  div Offers
   div.container-fluid
     div.row.list-group-item(ng-repeat='offer in campaign.offers')
       div.col-md-12
@@ -115,8 +116,12 @@ div(ng-include='"components/navbar/navbar.html"')
               span 
               strong Split %:
             div.col-md-3
-              input(type="text" ng-model="offer.split")
+              input(type="text" ng-model="offer.splitWeight")
   div.container-fluid
+    div.row.list-group-item
+      div.col-md-6
+        button.btn.btn-inverse.btn-lg.btn-login(ng-click='addOffer()')
+            | Add Offer
     div.row.list-group-item
       div.col-md-6
         button.btn.btn-inverse.btn-lg.btn-login(ng-click='save()')

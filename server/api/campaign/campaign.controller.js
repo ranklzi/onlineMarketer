@@ -63,21 +63,6 @@ exports.destroy = function(req, res) {
     return res.json(201);
   });
 };
-
-//track campaign click
-exports.track = function(req, res) {
-  Campaign.findById(req.params.id, function (err, campaign) {
-    if (err) { return handleError(res, err); }
-    if(!campaign) { return res.send(404); }
-
-    console.log('tracking click................................................................');
-    
-    if (!campaign.offers || campaign.offers.length == 0) { return res.send(400); }
-
-    return res.redirect(campaign.offers[0].url);
-  });
-};
-
 function handleError(res, err) {
   return res.send(500, err);
 }

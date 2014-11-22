@@ -3,11 +3,37 @@ div(ng-include='"components/navbar/navbar.html"')
   p
     | Create New Campaign 
     a(href="/campaign/new") here
-  ul.list-group
-    li.list-group-item(ng-repeat='user in users')
-      strong {{user.name}}
-      br
-      span.text-muted {{user.email}}
-      a(href="/campaign/{{user.id}}") Edit <!--a(href="/campaign/{{user._id}}") Edit -->
-      a.trash(ng-click='delete(user)')
-        span.glyphicon.glyphicon-trash.pull-right
+  div.row.list-group-item
+    div.col-md-1
+      strong Id
+    div.col-md-5
+      strong Name
+    div.col-md-1
+      strong Clicks
+    div.col-md-1
+      strong Leads
+    div.col-md-1
+      strong Spent
+    div.col-md-1
+      strong Revenue
+    div.col-md-1
+      strong Conversion Rate
+    div.col-md-1
+      strong P/L
+    div.col-md-1
+      strong ROI
+  div.row.list-group-item(ng-repeat='campaign in users')
+    div.col-md-1 {{campaign.id}}
+    div.col-md-5 {{campaign.name}}
+    div.col-md-1 {{campaign.clicks}}
+    div.col-md-1 {{campaign.conversions}}
+    div.col-md-1 {{campaign.spent}}
+
+  //- ul.list-group
+  //-   li.list-group-item(ng-repeat='user in users')
+  //-     strong {{user.name}}
+  //-     br
+  //-     span.text-muted {{user.email}}
+  //-     a(href="/campaign/{{user.id}}") Edit <!--a(href="/campaign/{{user._id}}") Edit -->
+  //-     a.trash(ng-click='delete(user)')
+  //-       span.glyphicon.glyphicon-trash.pull-right

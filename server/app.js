@@ -27,8 +27,7 @@ require('./config/express')(app);
 require('./routes')(app);
 
   // Populate DB with sample data
-if(config.seedDB) { 
-	require('./config/seed'); 
+if(config.seedDB) { 	
   require('./config/pgseed');
 }
 

@@ -44,7 +44,29 @@ exports.getCampaigns = function (done) {
       client.end();
       return console.error('error fetching client from pool', err);
     }
-    client.query('SELECT * FROM campaigns', function(err, result) {
+    client.query('SELECT campaigns.id, campaigns.name, COUNT(clicks.id) as clicks, SUM(CASE WHEN clicks.conversion = TRUE THEN 1 ELSE 0 END) as conversions, SUM(clicks."cpcRate") as spent FROM campaigns INNER JOIN offers ON campaigns.id = offers."campaignId" LEFT OUTER JOIN clicks ON offers.id = clicks."offerId" GROUP BY campaigns.id;', 
+      function(err, result) {
+
+      if(err) {
+        client.end();
+        return console.error('error running query', err);
+      }
+      
+      done(result.rows);
+      client.end();
+
+      
+    });
+  });
+}
+
+exports.getCampaignsStats = function (done) {
+  pg.connect(config.postreg.connectionString, function(err, client) {
+    if(err) {
+      client.end();
+      return console.error('error fetching client from pool', err);
+    }
+    client.query('SELECT * FROM campaigns INNER JOIN ', function(err, result) {
 
       if(err) {
         client.end();
@@ -106,7 +128,7 @@ exports.updateCampaign = function (campaignId, campaign, done) {
             offersDal.upateCampaignOffers(campaignId, campaign.offers, function(err, offers) {
               if(err) { 
                 client.end();
-                return handleError(offer, err); 
+                return console.log(err); 
               }
               campaign.offers = offers;
 
