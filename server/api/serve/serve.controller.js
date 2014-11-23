@@ -51,7 +51,7 @@ var chooseOffer = function(totalWeight, offers) {
   var counter = 0;
 
   for (var i = 0; i < offers.length; i++) { 
-    counter += offers[i].splitWeight;
+    counter = counter + offers[i].splitWeight;
 
     if (counter > marker) {
       return offers[i];

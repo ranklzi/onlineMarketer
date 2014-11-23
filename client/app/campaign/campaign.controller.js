@@ -37,7 +37,7 @@ angular.module('onlineMarketerApp')
       if ($scope.campaign && $scope.campaign.offers && $scope.campaign.offers.length > 0) {
         for (var i = 0; i < $scope.campaign.offers.length; i++) { 
           if ($scope.campaign.offers[i].splitWeight) {
-            weightSum += $scope.campaign.offers[i].splitWeight;
+            weightSum = weightSum + $scope.campaign.offers[i].splitWeight;
           }
         }
       }

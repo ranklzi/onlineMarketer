@@ -121,7 +121,7 @@ exports.updateCampaign = function (campaignId, campaign, done) {
       }
 
       client.query(
-        'UPDATE campaigns SET name = $2, comment = $3, active = $4, "defaultCpc" = $5, url = $6, "enableRotation" = $7, "useTokens" = $8, key = $9, weightSum = $10, "updatedAt" = $11 WHERE id = $1', 
+        'UPDATE campaigns SET name = $2, comment = $3, active = $4, "defaultCpc" = $5, url = $6, "enableRotation" = $7, "useTokens" = $8, key = $9, "weightSum" = $10, "updatedAt" = $11 WHERE id = $1', 
         [campaignId, campaign.name, campaign.comment, campaign.active, campaign.defaultCpc, campaign.url, campaign.enableRotation, campaign.useTokens, campaign.key, campaign.weightSum, new Date()], 
         function(err, result) {
 
