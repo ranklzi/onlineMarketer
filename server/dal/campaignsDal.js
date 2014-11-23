@@ -44,7 +44,14 @@ exports.getCampaigns = function (done) {
       client.end();
       return console.error('error fetching client from pool', err);
     }
-    client.query('SELECT campaigns.id, campaigns.name, COUNT(clicks.id) as clicks, SUM(CASE WHEN clicks.conversion = TRUE THEN 1 ELSE 0 END) as conversions, SUM(clicks."cpcRate") as spent FROM campaigns INNER JOIN offers ON campaigns.id = offers."campaignId" LEFT OUTER JOIN clicks ON offers.id = clicks."offerId" GROUP BY campaigns.id;', 
+
+    var query = 'SELECT campaigns.id, campaigns.name, campaigns."defaultCpc", ' + 
+      'COUNT(clicks.id) as clicks, SUM(CASE WHEN clicks.conversion = TRUE THEN 1 ELSE 0 END) as conversions, ' + 
+      'SUM(clicks."cpcRate") as spent ' + //, SUM(offers."payOut") as revenue ' + 
+      'FROM campaigns INNER JOIN offers ON campaigns.id = offers."campaignId" ' +
+      'LEFT OUTER JOIN clicks ON offers.id = clicks."offerId" GROUP BY campaigns.id;';
+
+    client.query(query, 
       function(err, result) {
 
       if(err) {
@@ -114,8 +121,8 @@ exports.updateCampaign = function (campaignId, campaign, done) {
       }
 
       client.query(
-        'UPDATE campaigns SET name = $2, comment = $3, active = $4, "defaultCpc" = $5, url = $6, "enableRotation" = $7, "useTokens" = $8, key = $9, "updatedAt" = $10 WHERE id = $1', 
-        [campaignId, campaign.name, campaign.comment, campaign.active, campaign.defaultCpc, campaign.url, campaign.enableRotation, campaign.useTokens, campaign.key, new Date()], 
+        'UPDATE campaigns SET name = $2, comment = $3, active = $4, "defaultCpc" = $5, url = $6, "enableRotation" = $7, "useTokens" = $8, key = $9, weightSum = $10, "updatedAt" = $11 WHERE id = $1', 
+        [campaignId, campaign.name, campaign.comment, campaign.active, campaign.defaultCpc, campaign.url, campaign.enableRotation, campaign.useTokens, campaign.key, campaign.weightSum, new Date()], 
         function(err, result) {
 
             if (err) {

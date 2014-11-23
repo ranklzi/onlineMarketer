@@ -67,7 +67,7 @@ exports.upateCampaignOffers = function (campaignId, offers, done) {
               return;
             }
             offer.campaignId = campaignId;
-            
+
             if(!offer.id) {
               exports.createOfferAtomic(offer, client, function(result) {
                 callback();
@@ -76,9 +76,7 @@ exports.upateCampaignOffers = function (campaignId, offers, done) {
             else {
               var offerOld = offersOld.findByJson({ id : offer.id});
               console.log(offer);
-
             
-              console.log('foundddddddddddddddddddddd');
               //found - update db and delete from offersOld.
 
               client.query(

@@ -25,7 +25,7 @@ exports.track = function(req, res) {
 
     if (!campaign.offers || campaign.offers.length == 0) { return res.send(400); }
 
-    var chosenOffer = campaign.offers[0];
+    var chosenOffer = chooseOffer(campaign.weightSum, campaign.offers);
 
     var click = {};
     click.cookieId = services.guidGenerator.generateGuid();    
@@ -39,13 +39,28 @@ exports.track = function(req, res) {
 
     res.cookie('cookieId', click.cookieId, { maxAge: 900000, httpOnly: true });
 
-    // hdr = 'foo=bar';
-
     clicksDal.createClick(click);
     
     return res.redirect(chosenOffer.url);
   });
 };
+
+var chooseOffer = function(totalWeight, offers) {
+  var marker = Math.floor(Math.random() * totalWeight);
+
+  var counter = 0;
+
+  for (var i = 0; i < offers.length; i++) { 
+    counter += offers[i].splitWeight;
+
+    if (counter > marker) {
+      return offers[i];
+    }
+  }
+
+  console.log('errorrrrr randommmmmmmmmmmmmmmmmmmmmmmm');
+};
+
 
 function handleError(res, err) {
   return res.send(500, err);

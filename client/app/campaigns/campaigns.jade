@@ -13,6 +13,8 @@ div(ng-include='"components/navbar/navbar.html"')
     div.col-md-1
       strong Leads
     div.col-md-1
+      strong CPC
+    div.col-md-1
       strong Spent
     div.col-md-1
       strong Revenue
@@ -27,6 +29,7 @@ div(ng-include='"components/navbar/navbar.html"')
     div.col-md-5 {{campaign.name}}
     div.col-md-1 {{campaign.clicks}}
     div.col-md-1 {{campaign.conversions}}
+    div.col-md-1 {{campaign.defaultCpc}}
     div.col-md-1 {{campaign.spent}}
 
   //- ul.list-group

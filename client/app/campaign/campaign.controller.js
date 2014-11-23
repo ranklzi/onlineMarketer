@@ -31,7 +31,24 @@ angular.module('onlineMarketerApp')
       //console.log($scope.campaign);
     }
 
+    var calcWeightSum = function() {
+      var weightSum = 0;
+
+      if ($scope.campaign && $scope.campaign.offers && $scope.campaign.offers.length > 0) {
+        for (var i = 0; i < $scope.campaign.offers.length; i++) { 
+          if ($scope.campaign.offers[i].splitWeight) {
+            weightSum += $scope.campaign.offers[i].splitWeight;
+          }
+        }
+      }
+
+      return weightSum;
+    }
+
     $scope.save = function() {
+
+      $scope.campaign.weightSum = calcWeightSum();
+
       if (!$scope.campaign.id) {
         $scope.campaign.$save();
       }
