@@ -4,8 +4,6 @@ var pg = require('pg');
 var config = require('../config/environment');
 var offersDal = require('./offersDal');
 
-var dal = {};
-
 exports.getCampaign = function (campaignId, done) {
   pg.connect(config.postreg.connectionString, function(err, client) {
     if(err) {

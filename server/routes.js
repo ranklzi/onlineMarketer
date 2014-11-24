@@ -10,7 +10,6 @@ var cookieParser = require('cookie-parser')
 module.exports = function(app) {
 
   // Insert routes below
-  app.use('/api/things', require('./api/thing'));
   app.use('/api/users', require('./api/user'));
   app.use('/api/campaigns', require('./api/campaign'));
   app.use('/serve', require('./api/serve'));

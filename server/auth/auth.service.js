@@ -1,12 +1,13 @@
 'use strict';
 
-var mongoose = require('mongoose');
+var pg = require('pg');
+var usersDal = require('../dal/usersDal');
 var passport = require('passport');
 var config = require('../config/environment');
 var jwt = require('jsonwebtoken');
 var expressJwt = require('express-jwt');
 var compose = require('composable-middleware');
-var User = require('../api/user/user.model');
+//var User = require('../api/user/user.model');
 var validateJwt = expressJwt({ secret: config.secrets.session });
 
 /**
@@ -25,9 +26,11 @@ function isAuthenticated() {
     })
     // Attach user to request
     .use(function(req, res, next) {
-      User.findById(req.user._id, function (err, user) {
-        if (err) return next(err);
+      usersDal.getUserById(req.user._id, function(user) {
+        
         if (!user) return res.send(401);
+
+        console.log('auth - user attached to request: ' + JSON.stringify(user))
 
         req.user = user;
         next();

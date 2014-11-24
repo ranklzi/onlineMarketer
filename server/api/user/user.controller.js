@@ -1,6 +1,7 @@
 'use strict';
 
-var User = require('./user.model');
+var pg = require('pg');
+var usersDal = require('../../dal/usersDal');
 var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
@@ -14,8 +15,8 @@ var validationError = function(res, err) {
  * restriction: 'admin'
  */
 exports.index = function(req, res) {
-  User.find({}, '-salt -hashedPassword', function (err, users) {
-    if(err) return res.send(500, err);
+  usersDal.getUsers(function (users) {
+    //if(err) return res.send(500, err);
     res.json(200, users);
   });
 };
@@ -24,11 +25,12 @@ exports.index = function(req, res) {
  * Creates a new user
  */
 exports.create = function (req, res, next) {
-  var newUser = new User(req.body);
+  var newUser = req.body;
   newUser.provider = 'local';
   newUser.role = 'user';
-  newUser.save(function(err, user) {
-    if (err) return validationError(res, err);
+  console.log('userrrr to create: ' + JSON.stringify(newUser));
+  usersDal.createUser(newUser, function(user) {
+    //if (err) return validationError(res, err);
     var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
     res.json({ token: token });
   });
@@ -40,8 +42,8 @@ exports.create = function (req, res, next) {
 exports.show = function (req, res, next) {
   var userId = req.params.id;
 
-  User.findById(userId, function (err, user) {
-    if (err) return next(err);
+  usersDal.getUserById(userId, function (user) {
+    //if (err) return next(err);
     if (!user) return res.send(401);
     res.json(user.profile);
   });
@@ -52,11 +54,12 @@ exports.show = function (req, res, next) {
  * restriction: 'admin'
  */
 exports.destroy = function(req, res) {
-  User.findByIdAndRemove(req.params.id, function(err, user) {
-    if(err) return res.send(500, err);
-    return res.send(204);
-  });
+  // User.findByIdAndRemove(req.params.id, function(err, user) {
+  //   if(err) return res.send(500, err);
+  //   return res.send(204);
+  // });
 };
+
 
 /**
  * Change a users password
@@ -66,10 +69,10 @@ exports.changePassword = function(req, res, next) {
   var oldPass = String(req.body.oldPassword);
   var newPass = String(req.body.newPassword);
 
-  User.findById(userId, function (err, user) {
-    if(user.authenticate(oldPass)) {
+  usersDal.getUserByIdWithPassword(userId, function (err, user) {
+    if(usersDal.authenticate(oldPass, user)) {
       user.password = newPass;
-      user.save(function(err) {
+      usersDal.updatePassword(user, function(err) {
         if (err) return validationError(res, err);
         res.send(200);
       });
@@ -84,11 +87,11 @@ exports.changePassword = function(req, res, next) {
  */
 exports.me = function(req, res, next) {
   var userId = req.user._id;
-  User.findOne({
-    _id: userId
-  }, '-salt -hashedPassword', function(err, user) { // don't ever give out the password or salt
-    if (err) return next(err);
+  usersDal.getUserById(userId, function(user) { // don't ever give out the password or salt
+    //if (err) return next(err);
     if (!user) return res.json(401);
+    console.log('userrrrrrrrrrrrrrrrrrrr');
+    console.log(user);
     res.json(user);
   });
 };
