@@ -10,10 +10,8 @@
 'use strict';
 
 var _ = require('lodash');
-var models = require('../../models');
 var services = require('../../services');
 var campaignsDal = require('../../dal/campaignsDal');
-var Campaign = models.campaign;//require('./campaign.model');
 
 // Get the list of Campaigns
 exports.index = function(req, res) {

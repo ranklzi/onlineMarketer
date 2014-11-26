@@ -18,12 +18,7 @@ angular.module('onlineMarketerApp')
         name : '',     comment : '',
         active : true,
         enableRotation: false,
-        offers : [
-        JSON.stringify({
-             name: "Google Offer",
-             url: "http://www.google.com"      
-           })
-        ]
+        offers : []
       });
 
       $scope.campaign = campaign;
@@ -46,10 +41,9 @@ angular.module('onlineMarketerApp')
     }
 
     $scope.save = function() {
-
       $scope.campaign.weightSum = calcWeightSum();
-
-      if (!$scope.campaign.id) {
+      
+      if (!$scope.campaign.id) { 
         $scope.campaign.$save();
       }
       else {
@@ -59,6 +53,10 @@ angular.module('onlineMarketerApp')
 
     $scope.addOffer = function() {
       $scope.campaign.offers.push({});
+    };
+
+    $scope.getCampaignLink = function() {
+      return 'http://' + $location.host() + ':' + $location.port() + '/serve/' + $scope.campaign.key;
     };
     
   });

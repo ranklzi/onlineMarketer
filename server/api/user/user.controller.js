@@ -90,8 +90,8 @@ exports.me = function(req, res, next) {
   usersDal.getUserById(userId, function(user) { // don't ever give out the password or salt
     //if (err) return next(err);
     if (!user) return res.json(401);
-    console.log('userrrrrrrrrrrrrrrrrrrr');
-    console.log(user);
+    //console.log('userrrrrrrrrrrrrrrrrrrr');
+    //console.log(user);
     res.json(user);
   });
 };

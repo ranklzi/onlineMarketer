@@ -6,11 +6,10 @@
 
 // Set default node environment to development
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-require('newrelic');
+//require('newrelic');
 
 var express = require('express');
 var config = require('./config/environment');
-var models = require('./models');
 
 var Schema = require('./config/pgSchema');
 //var sequence = require('when/sequence');
@@ -23,9 +22,9 @@ require('./config/express')(app);
 require('./routes')(app);
 
   // Populate DB with sample data
-if(config.seedDB) { 	
-  require('./config/pgseed');
-}
+// if(config.seedDB) { 	
+//   require('./config/pgseed');
+// }
 
 // Start server
 server.listen(config.port, config.ip, function () {

@@ -19,7 +19,7 @@ var cookie = require('cookie');
 
 //track campaign click
 exports.track = function(req, res) {
-  campaignsDal.getCampaign(req.params.id, function (campaign) {
+  campaignsDal.getCampaignByKey(req.params.id, function (campaign) {
     //if (err) { return handleError(res, err); }
     if(!campaign) { return res.send(404); }
 

@@ -170,7 +170,7 @@ var validatePresenceOf = function(value) {
 };
 
 exports.authenticate = function(plainText, user) {
-    console.log('authenticatingggggggggggggggggggggggggggggggggggggg');
+    //console.log('authenticatingggggggggggggggggggggggggggggggggggggg');
     if (!user) {
       return false;
     }

@@ -34,6 +34,38 @@ exports.getCampaign = function (campaignId, done) {
       });
     });
   });
+};
+
+exports.getCampaignByKey = function (key, done) {
+  pg.connect(config.postreg.connectionString, function(err, client) {
+    if(err) {
+      client.end();
+      return console.error('error fetching client from pool', err);
+    }
+    client.query('SELECT * FROM campaigns WHERE key = $1', [key], function(err1, result1) {
+      if(err1) {
+        client.end();
+        return console.error('error running query', err1);
+      }
+
+      if (!result1 || result1.rows.length < 1) {
+        client.end();
+        done();
+        return console.error('no results from campaign query', err1);
+      }
+
+      client.query('SELECT * FROM offers WHERE "campaignId" = ' + result1.rows[0].id, function(err2, result2) {
+        if(err2) {
+          client.end();
+          return console.error('error running query', err2);
+        }
+
+        result1.rows[0].offers = result2.rows;
+        done(result1.rows[0]);
+        client.end();        
+      });
+    });
+  });
 }
 
 exports.getCampaigns = function (done) {
@@ -46,7 +78,7 @@ exports.getCampaigns = function (done) {
     var query = 'SELECT campaigns.id, campaigns.name, campaigns."defaultCpc", ' + 
       'COUNT(clicks.id) as clicks, SUM(CASE WHEN clicks.conversion = TRUE THEN 1 ELSE 0 END) as conversions, ' + 
       'SUM(clicks."cpcRate") as spent ' + //, SUM(offers."payOut") as revenue ' + 
-      'FROM campaigns INNER JOIN offers ON campaigns.id = offers."campaignId" ' +
+      'FROM campaigns LEFT OUTER JOIN offers ON campaigns.id = offers."campaignId" ' +
       'LEFT OUTER JOIN clicks ON offers.id = clicks."offerId" GROUP BY campaigns.id;';
 
     client.query(query, 
@@ -104,6 +136,7 @@ exports.createCampaign = function (campaign, done) {
             // else {
             //     console.log('row inserted with data: ' + JSON.stringify(result));
             // }
+            done();
 
             client.end();
         });  
