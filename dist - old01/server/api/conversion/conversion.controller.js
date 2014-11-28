@@ -14,7 +14,6 @@ var services = require('../../services');
 var campaignsDal = require('../../dal/campaignsDal');
 var clicksDal = require('../../dal/clicksDal');
 var cookie = require('cookie');
-var url = require('url');
 
 
 var parseCookies = function(request) {
@@ -30,8 +29,9 @@ var parseCookies = function(request) {
   }
 
 //track campaign click
-exports.trackClient = function(req, res) {
+exports.track = function(req, res) {
 
+  console.log(res);
   var cookies = parseCookies(req);
 
   if (!cookies || !cookies.cookieId) {
@@ -45,40 +45,11 @@ exports.trackClient = function(req, res) {
 
     if (!click.conversion) {
       click.conversion = 1;
-      click.conversionDateTime = new Date();
+      click.conversionDateTime = Date.now()/1000;
 
       clicksDal.updateClick(click, function() {
         res.writeHead(200, {'Content-Type': 'image/jpeg'});
         res.end();
-
-        return;
-      })
-    }
-
-    return handleError(res, 'already converted.');
-    
-  });
-};
-
-exports.trackServer = function(req, res) {
-  console.log('trackServerrrrrrrrrrrrrrrrrrrrrrrrr');
-  console.log(req.params.id);
-
-if (!req.params.id) {
-    return handleError('clientId not found.');
-  }
-
-  clicksDal.getClickByCookieId(req.params.id, function(click) {
-    if (!click) {
-      return handleError('origin click not found.');
-    }
-
-    if (!click.conversion) {
-      click.conversion = 1;
-      click.conversionDateTime = new Date();
-
-      clicksDal.updateClick(click, function() {
-        res.send(200);
 
         return;
       })

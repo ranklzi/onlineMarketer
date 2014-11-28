@@ -1089,3 +1089,11 @@
 {"v":0,"level":40,"name":"newrelic","hostname":"ran-THINK","pid":23228,"time":"2014-11-25T21:15:02.790Z","msg":"Unrecognized version NaN of Express detected; not instrumenting","component":"express"}
 {"v":0,"level":30,"name":"newrelic","hostname":"ran-THINK","pid":23228,"time":"2014-11-25T21:15:06.737Z","msg":"Reporting to: https://rpm.newrelic.com/accounts/785705/applications/5408978","component":"new_relic_response"}
 {"v":0,"level":30,"name":"newrelic","hostname":"ran-THINK","pid":23228,"time":"2014-11-25T21:15:06.737Z","msg":"Connected to collector-129.newrelic.com:443 with agent run ID 1901877126.","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"ran-THINK","pid":5700,"time":"2014-11-28T16:34:05.822Z","msg":"Starting New Relic for Node.js connection process."}
+{"v":0,"level":40,"name":"newrelic","hostname":"ran-THINK","pid":5700,"time":"2014-11-28T16:34:06.198Z","msg":"Unrecognized version NaN of Express detected; not instrumenting","component":"express"}
+{"v":0,"level":30,"name":"newrelic","hostname":"ran-THINK","pid":5700,"time":"2014-11-28T16:34:10.453Z","msg":"Reporting to: https://rpm.newrelic.com/accounts/785705/applications/5483778","component":"new_relic_response"}
+{"v":0,"level":30,"name":"newrelic","hostname":"ran-THINK","pid":5700,"time":"2014-11-28T16:34:10.454Z","msg":"Connected to collector-129.newrelic.com:443 with agent run ID 1910134831.","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"ran-THINK","pid":9260,"time":"2014-11-28T16:35:06.841Z","msg":"Starting New Relic for Node.js connection process."}
+{"v":0,"level":40,"name":"newrelic","hostname":"ran-THINK","pid":9260,"time":"2014-11-28T16:35:07.196Z","msg":"Unrecognized version NaN of Express detected; not instrumenting","component":"express"}
+{"v":0,"level":30,"name":"newrelic","hostname":"ran-THINK","pid":9260,"time":"2014-11-28T16:35:10.877Z","msg":"Reporting to: https://rpm.newrelic.com/accounts/785705/applications/5483778","component":"new_relic_response"}
+{"v":0,"level":30,"name":"newrelic","hostname":"ran-THINK","pid":9260,"time":"2014-11-28T16:35:10.878Z","msg":"Connected to collector-129.newrelic.com:443 with agent run ID 1910137543.","component":"collector_api"}

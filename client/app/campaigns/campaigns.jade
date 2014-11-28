@@ -8,7 +8,7 @@ div(ng-include='"components/navbar/navbar.html"')
       strong Id
     div.col-md-2
       strong Name
-    div.col-md-1
+    div.col-md-2
     div.col-md-1
       strong Clicks
     div.col-md-1
@@ -28,8 +28,11 @@ div(ng-include='"components/navbar/navbar.html"')
   div.row.list-group-item(ng-repeat='campaign in users')
     div.col-md-1 {{campaign.id}}
     div.col-md-2 {{campaign.name}}
-    div.col-md-1
-      a(href="/campaign/{{campaign.id}}") Edit
+    div.col-md-2
+      span
+        a(href="/campaign/{{campaign.id}}") Edit
+        span  | 
+        a(ng-click="delete(campaign)") Delete
     div.col-md-1 {{campaign.clicks}}
     div.col-md-1 {{campaign.conversions}}
     div.col-md-1 {{campaign.defaultCpc}}

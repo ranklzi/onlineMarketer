@@ -127,8 +127,8 @@ exports.createCampaign = function (campaign, done) {
       }
 
       client.query(
-        'INSERT INTO campaigns (name, comment, active, "defaultCpc", url, "enableRotation", "useTokens", key, "concatenateClickId", "createdAt", "updatedAt") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)', 
-        [campaign.name, campaign.comment, campaign.active, campaign.defaultCpc, campaign.url, campaign.enableRotation, campaign.useTokens, campaign.key, campaign.concatenateClickId, new Date(), new Date()], 
+        'INSERT INTO campaigns (name, comment, active, "defaultCpc", url, "enableRotation", "useTokens", key, "createdAt", "updatedAt") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)', 
+        [campaign.name, campaign.comment, campaign.active, campaign.defaultCpc, campaign.url, campaign.enableRotation, campaign.useTokens, campaign.key, new Date(), new Date()], 
         function(err, result) {
             if (err) {
                 console.log(err);
@@ -152,8 +152,8 @@ exports.updateCampaign = function (campaignId, campaign, done) {
       }
 
       client.query(
-        'UPDATE campaigns SET name = $2, comment = $3, active = $4, "defaultCpc" = $5, url = $6, "enableRotation" = $7, "useTokens" = $8, key = $9, "weightSum" = $10, "concatenateClickId" = $11, "updatedAt" = $12 WHERE id = $1', 
-        [campaignId, campaign.name, campaign.comment, campaign.active, campaign.defaultCpc, campaign.url, campaign.enableRotation, campaign.useTokens, campaign.key, campaign.weightSum, campaign.concatenateClickId, new Date()], 
+        'UPDATE campaigns SET name = $2, comment = $3, active = $4, "defaultCpc" = $5, url = $6, "enableRotation" = $7, "useTokens" = $8, key = $9, "weightSum" = $10, "updatedAt" = $11 WHERE id = $1', 
+        [campaignId, campaign.name, campaign.comment, campaign.active, campaign.defaultCpc, campaign.url, campaign.enableRotation, campaign.useTokens, campaign.key, campaign.weightSum, new Date()], 
         function(err, result) {
 
             if (err) {
@@ -184,7 +184,7 @@ exports.deleteCampaign = function (campaignId, done) {
       if(err) {
         return console.error('error fetching client from pool', err);
       }
-      //todo - delete all clicks
+
       client.query(
         'DELETE FROM offers WHERE "campaignId" = ' + campaignId, 
         function(err, result) {
@@ -204,8 +204,7 @@ exports.deleteCampaign = function (campaignId, done) {
                     if (done) { done(err); }
                     return;                
                 }
-                console.log('got here2222222');
-                done();
+                 console.log('got here2222222');
                 client.end();
               });
         });  

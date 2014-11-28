@@ -6,8 +6,7 @@ var controller = require('./conversion.controller');
 var router = express.Router();
 
 // router.get('/', controller.index);
-router.get('/client', controller.trackClient);
-router.get('/s2s/:id', controller.trackServer);
+router.get('/', controller.track);
 // router.post('/', controller.create);
 // router.put('/:id', controller.update);
 // router.patch('/:id', controller.update);

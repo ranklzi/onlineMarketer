@@ -36,34 +36,16 @@ exports.track = function(req, res) {
       (req.connection.socket && req.connection.socket.remoteAddress);
     click.offerId = chosenOffer.id;
     click.cpcRate = campaign.defaultCpc;
-    click.clickDateTime = new Date();
 
     res.cookie('cookieId', click.cookieId, { maxAge: 900000, httpOnly: true });
 
-    var redirectUrl = chosenOffer.url;
-    console.log(click.cookieId);
-
-    if (campaign.concatenateClickId) {
-      redirectUrl += click.cookieId;
-    }
-
     clicksDal.createClick(click);
     
-    return res.redirect(redirectUrl);
+    return res.redirect(chosenOffer.url);
   });
 };
 
 var chooseOffer = function(totalWeight, offers) {
-
-  if (!totalWeight || totalWeight == 0) {
-    if (!offers || offers.length == 0) {
-      return;
-    }
-    else {
-      return offers[0];
-    }
-  }
-
   var marker = Math.floor(Math.random() * totalWeight);
 
   var counter = 0;

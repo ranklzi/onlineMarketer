@@ -14,8 +14,8 @@ exports.createClick = function (click) {
       }
 
       client.query(
-    'INSERT INTO clicks("ip", "cookieId", "offerId", "cpcRate", "clickDateTime") VALUES ($1, $2, $3, $4, $5)', 
-        [click.ip, click.cookieId, click.offerId, click.cpcRate, click.clickDateTime], 
+    'INSERT INTO clicks("ip", "cookieId", "offerId", "cpcRate") VALUES ($1, $2, $3, $4)', 
+        [click.ip, click.cookieId, click.offerId, click.cpcRate], 
     function(err, result) {
         if (err) {
             client.end();

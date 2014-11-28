@@ -84,11 +84,16 @@ div(ng-include='"components/navbar/navbar.html"')
       div.col-md-6
         span url end or template
     div.row.list-group-item
-      div.col-md-6
+      div.col-md-3
         span 
         strong Enable Rotation:
-      div.col-md-6
+      div.col-md-3
         input(type="checkbox" ng-model="campaign.useTokens")
+      div.col-md-3
+        span 
+        strong Concatenate clickId:
+      div.col-md-3
+        input(type="checkbox" ng-model="campaign.concatenateClickId")
   br
   div Offers
   div.container-fluid

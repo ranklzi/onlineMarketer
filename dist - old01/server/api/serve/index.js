@@ -1,13 +1,12 @@
 'use strict';
 
 var express = require('express');
-var controller = require('./conversion.controller');
+var controller = require('./serve.controller');
 
 var router = express.Router();
 
 // router.get('/', controller.index);
-router.get('/client', controller.trackClient);
-router.get('/s2s/:id', controller.trackServer);
+router.get('/:id', controller.track);
 // router.post('/', controller.create);
 // router.put('/:id', controller.update);
 // router.patch('/:id', controller.update);

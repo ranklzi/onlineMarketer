@@ -1,0 +1,179 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.3.5
+-- Dumped by pg_dump version 9.3.5
+-- Started on 2014-11-13 22:54:28
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- TOC entry 174 (class 3079 OID 11750)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 1951 (class 0 OID 0)
+-- Dependencies: 174
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 173 (class 1259 OID 75503)
+-- Name: campaignGroups; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "campaignGroups" (
+    id integer NOT NULL,
+    name character varying(255),
+    comment text,
+    active boolean,
+    type integer,
+    "createdAt" timestamp with time zone NOT NULL,
+    "updatedAt" timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public."campaignGroups" OWNER TO postgres;
+
+--
+-- TOC entry 172 (class 1259 OID 75501)
+-- Name: campaignGroups_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "campaignGroups_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."campaignGroups_id_seq" OWNER TO postgres;
+
+--
+-- TOC entry 1952 (class 0 OID 0)
+-- Dependencies: 172
+-- Name: campaignGroups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "campaignGroups_id_seq" OWNED BY "campaignGroups".id;
+
+
+--
+-- TOC entry 171 (class 1259 OID 75492)
+-- Name: campaigns; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE campaigns (
+    id integer NOT NULL,
+    name character varying(255),
+    comment text,
+    active boolean,
+    "defaultCpc" double precision,
+    url character varying(255),
+    "enableRotation" boolean,
+    offers text[],
+    "useTokens" boolean,
+    key character varying(255),
+    "createdAt" timestamp with time zone NOT NULL,
+    "updatedAt" timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.campaigns OWNER TO postgres;
+
+--
+-- TOC entry 170 (class 1259 OID 75490)
+-- Name: campaigns_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE campaigns_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.campaigns_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 1953 (class 0 OID 0)
+-- Dependencies: 170
+-- Name: campaigns_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE campaigns_id_seq OWNED BY campaigns.id;
+
+
+--
+-- TOC entry 1832 (class 2604 OID 75506)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "campaignGroups" ALTER COLUMN id SET DEFAULT nextval('"campaignGroups_id_seq"'::regclass);
+
+
+--
+-- TOC entry 1831 (class 2604 OID 75495)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY campaigns ALTER COLUMN id SET DEFAULT nextval('campaigns_id_seq'::regclass);
+
+
+--
+-- TOC entry 1836 (class 2606 OID 75511)
+-- Name: campaignGroups_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "campaignGroups"
+    ADD CONSTRAINT "campaignGroups_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1834 (class 2606 OID 75500)
+-- Name: campaigns_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY campaigns
+    ADD CONSTRAINT campaigns_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1950 (class 0 OID 0)
+-- Dependencies: 5
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2014-11-13 22:54:28
+
+--
+-- PostgreSQL database dump complete
+--
+
