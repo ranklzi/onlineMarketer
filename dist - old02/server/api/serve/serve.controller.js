@@ -13,33 +13,13 @@ var _ = require('lodash');
 var services = require('../../services');
 var campaignsDal = require('../../dal/campaignsDal');
 var clicksDal = require('../../dal/clicksDal');
-var applicationCacheManager = require('../../bl/applicationCacheManager').applicationCacheManager;
 var cookie = require('cookie');
-var config = require('../../config/environment');
 
-var getCampaign = function(key, done) {
-  var campaign;
-  if (config.useCampaignCache) {
-    campaign = applicationCacheManager.getCampaign(key);
-    if (campaign) {
-      console.log('campaign found in cache.');
-      done(campaign);
-      return;  
-    }
-  }
-  
-  campaignsDal.getCampaignByKey(key, function (campaign) {
-    console.log('loaded from db.');
-    done(campaign);
-  });
-};
+
 
 //track campaign click
 exports.track = function(req, res) {
-
-  console.log('serving in node listening on port: ' + process.env.OPENSHIFT_NODEJS_PORT);
-
-  getCampaign(req.params.id, function (campaign) {
+  campaignsDal.getCampaignByKey(req.params.id, function (campaign) {
     //if (err) { return handleError(res, err); }
     if(!campaign) { return res.send(404); }
 
@@ -95,6 +75,8 @@ var chooseOffer = function(totalWeight, offers) {
       return offers[i];
     }
   }
+
+  console.log('errorrrrr randommmmmmmmmmmmmmmmmmmmmmmm');
 };
 
 

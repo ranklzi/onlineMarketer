@@ -68,7 +68,7 @@ exports.getCampaignByKey = function (key, done) {
   });
 }
 
-exports.getCampaignsStats = function (done) {
+exports.getCampaigns = function (done) {
   pg.connect(config.postreg.connectionString, function(err, client) {
     if(err) {
       client.end();
@@ -80,7 +80,6 @@ exports.getCampaignsStats = function (done) {
       'SUM(clicks."cpcRate") as spent ' + //, SUM(offers."payOut") as revenue ' + 
       'FROM campaigns LEFT OUTER JOIN offers ON campaigns.id = offers."campaignId" ' +
       'LEFT OUTER JOIN clicks ON offers.id = clicks."offerId" GROUP BY campaigns.id;';
-    
 
     client.query(query, 
       function(err, result) {
@@ -89,6 +88,7 @@ exports.getCampaignsStats = function (done) {
         client.end();
         return console.error('error running query', err);
       }
+      
       done(result.rows);
       client.end();
 
@@ -97,20 +97,13 @@ exports.getCampaignsStats = function (done) {
   });
 }
 
-exports.getOffersWithCampaignsData = function (done) {
+exports.getCampaignsStats = function (done) {
   pg.connect(config.postreg.connectionString, function(err, client) {
     if(err) {
       client.end();
       return console.error('error fetching client from pool', err);
     }
-
-    var query = 'SELECT campaigns.id AS "campaignId", campaigns.name AS "campaignName", campaigns.active AS "campaignActive", campaigns."defaultCpc", campaigns."enableRotation", ' + 
-       'campaigns."useTokens", "concatenateClickId", campaigns.key AS "campaignKey", campaigns."weightSum", offers.id AS "offerId", offers.name AS "offerName", ' +
-       ' offers.active AS "offerAcitve", offers.url AS "offerUrl", offers.payout, offers."splitWeight"' +
-  'FROM campaigns LEFT OUTER JOIN offers ON campaigns.id = offers."campaignId";';
-
-    client.query(query, 
-      function(err, result) {
+    client.query('SELECT * FROM campaigns INNER JOIN ', function(err, result) {
 
       if(err) {
         client.end();
@@ -123,7 +116,7 @@ exports.getOffersWithCampaignsData = function (done) {
       
     });
   });
-};
+}
 
 exports.createCampaign = function (campaign, done) {
   pg.connect(config.postreg.connectionString, 
@@ -211,8 +204,7 @@ exports.deleteCampaign = function (campaignId, done) {
                     if (done) { done(err); }
                     return;                
                 }
-                console.log('got here2222222');
-                done();
+                 console.log('got here2222222');
                 client.end();
               });
         });  

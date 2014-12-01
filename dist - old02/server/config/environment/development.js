@@ -17,6 +17,5 @@ module.exports = {
     }
   },
 
-  seedDB: true,
-  useCampaignCache: true
+  seedDB: true
 };

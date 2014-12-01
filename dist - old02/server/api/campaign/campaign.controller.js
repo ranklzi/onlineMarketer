@@ -15,7 +15,7 @@ var campaignsDal = require('../../dal/campaignsDal');
 
 // Get the list of Campaigns
 exports.index = function(req, res) {
-  campaignsDal.getCampaignsStats(function (campaigns) {    
+  campaignsDal.getCampaigns(function (campaigns) {
     if(!campaigns) { return res.send(404); }
 
     //console.log(campaigns);
@@ -25,7 +25,7 @@ exports.index = function(req, res) {
 };
 
 // Get a single campaign
-exports.show = function(req, res) {  
+exports.show = function(req, res) {
   campaignsDal.getCampaign(req.params.id, function (campaign) {
     if(!campaign) { return res.send(404); }
 
