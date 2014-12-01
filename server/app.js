@@ -8,6 +8,7 @@
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 require('newrelic');
 
+var logManager = require('./services/logManager').logManager;
 
 var applicationCacheManager = require('./bl/applicationCacheManager').applicationCacheManager;
 
@@ -27,7 +28,7 @@ require('./routes')(app);
 applicationCacheManager.setCampaignsToCache(function() {
 	// Start server
 	server.listen(config.port, config.ip, function () {
-	  console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
+	  logManager.logger().log('info', 'Express server listening on %d, in %s mode', config.port, app.get('env'));
 	});
 });
 

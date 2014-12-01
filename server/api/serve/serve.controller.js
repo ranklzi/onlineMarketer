@@ -16,6 +16,7 @@ var clicksDal = require('../../dal/clicksDal');
 var applicationCacheManager = require('../../bl/applicationCacheManager').applicationCacheManager;
 var cookie = require('cookie');
 var config = require('../../config/environment');
+var logManager = require('../../services/logManager').logManager;
 
 var getCampaign = function(key, done) {
   var campaign;
@@ -37,7 +38,7 @@ var getCampaign = function(key, done) {
 //track campaign click
 exports.track = function(req, res) {
 
-  console.log('serving in node listening on port: ' + process.env.OPENSHIFT_NODEJS_PORT);
+  logManager.logger().log('info', 'serve controllder called (server port - %d)', config.port);
 
   getCampaign(req.params.id, function (campaign) {
     //if (err) { return handleError(res, err); }
