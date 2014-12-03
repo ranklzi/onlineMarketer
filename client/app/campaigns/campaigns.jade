@@ -1,48 +1,66 @@
 div(ng-include='"components/navbar/navbar.html"')
 .container
-  p
-    | Create New Campaign 
-    a(href="/campaign/new") here
-  div.row.list-group-item
-    div.col-md-1
-      strong Id
-    div.col-md-2
-      strong Name
-    div.col-md-2
-    div.col-md-1
-      strong Clicks
-    div.col-md-1
-      strong Leads
-    div.col-md-1
-      strong CPC
-    div.col-md-1
-      strong Spent
-    div.col-md-1
-      strong Revenue
-    div.col-md-1
-      strong Conversion Rate
-    div.col-md-1
-      strong P/L
-    div.col-md-1
-      strong ROI
-  div.row.list-group-item(ng-repeat='campaign in users')
-    div.col-md-1 {{campaign.id}}
-    div.col-md-2 {{campaign.name}}
-    div.col-md-2
-      span
-        a(href="/campaign/{{campaign.id}}") Edit
-        span  | 
-        a(ng-click="delete(campaign)") Delete
-    div.col-md-1 {{campaign.clicks}}
-    div.col-md-1 {{campaign.conversions}}
-    div.col-md-1 {{campaign.defaultCpc}}
-    div.col-md-1 {{campaign.spent}}
+  div.container
+    div.row.list-group-item
+      div.col-xs-1
+        a(href="/campaign/new" class="btn btn-primary btn-sm")
+          span New Campaign&nbsp;
+          span(class="glyphicon glyphicon-plus")
+    div.row.list-group-item
+      div.col-xs-2
+        span Campaign Status:
+        select(ui-select2="select2Options" ng-model="selectedCampaignStatus")
+          option(ng-repeat="campaignStatus in campaignStatuses" value="{{campaignStatus.value}}") {{campaignStatus.name}}
+        //- select(select2="select2Options"
+        //-    reset-search-input="false")
+        //-   option(ng-repeat="campaignStatus in campaignStatuses")
+          
 
-  //- ul.list-group
-  //-   li.list-group-item(ng-repeat='user in users')
-  //-     strong {{user.name}}
-  //-     br
-  //-     span.text-muted {{user.email}}
-  //-     a(href="/campaign/{{user.id}}") Edit <!--a(href="/campaign/{{user._id}}") Edit -->
-  //-     a.trash(ng-click='delete(user)')
-  //-       span.glyphicon.glyphicon-trash.pull-right
+        //- select(id="campaignStatus")
+        //-   option(value="AL") Alabama
+        //-   option(value="AL1") Alabama1
+        //-   option(value="AL2") Alabama2
+        //-   option(value="AL3") Alabama3
+      div.col-xs-2
+        span Campaign Group:
+      div.col-xs-2
+        span Traffic Source:
+      div.col-xs-2
+        span Date Range:
+      div.col-xs-2
+        span Stats Timezone:
+  div.container
+    div.row.list-group-item
+      div.col-xs-1
+        strong Id
+      div.col-xs-2
+        strong Name
+      div.col-xs-2
+      div.col-xs-1
+        strong Clicks
+      div.col-xs-1
+        strong Leads
+      div.col-xs-1
+        strong CPC
+      div.col-xs-1
+        strong Spent
+      div.col-xs-1
+        strong Revenue
+      div.col-xs-1
+        strong Conversion Rate
+      div.col-xs-1
+        strong P/L
+      div.col-xs-1
+        strong ROI
+    div.row.list-group-item(ng-repeat='campaign in users')
+      div.col-xs-1 {{campaign.id}}
+      div.col-xs-2 {{campaign.name}}
+      div.col-xs-2
+        span
+          a(href="/campaign/{{campaign.id}}") Edit
+          span  | 
+          a(ng-click="delete(campaign)") Delete
+      div.col-xs-1 {{campaign.clicks}}
+      div.col-xs-1 {{campaign.conversions}}
+      div.col-xs-1 {{campaign.defaultCpc}}
+      div.col-xs-1 {{campaign.spent}}

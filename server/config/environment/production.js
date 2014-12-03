@@ -4,7 +4,7 @@
 // =================================
 module.exports = {
   postreg: {
-    connectionString: 'postgres://postgres:postgres@localhost:5432/onlineMarketer'
+    connectionString: 'postgres://postgres:Kizi1980!@localhost:5432/onlineMarketer'
   },
   // Server IP
   ip:       process.env.OPENSHIFT_NODEJS_IP ||

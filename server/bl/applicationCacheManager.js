@@ -4,9 +4,11 @@ var applicationCacheManager = (function() {
 
 	var cacheManager = require('../services/cacheManager').cacheManager;
 	var campaignsDal = require('../dal/campaignsDal');
+	var updatesStatusDal = require('../dal/updatesStatusDal').updatesStatusDal;
 
-	return {
-		setCampaignsToCache: function(done) {	
+	var lastUpdated;
+
+	var setCampaignsToCache = function(done) {				
 			console.log('setCampaignsToCache called');		
 			campaignsDal.getOffersWithCampaignsData(function (offersExtended) {
 				cacheManager.clear();
@@ -51,8 +53,27 @@ var applicationCacheManager = (function() {
 
 				done();
 
+				lastUpdated = new Date();
+
 			});
-		},
+		};
+
+	var updateCacheIfNeeded = function() {
+		updatesStatusDal.getLastUpdate(1, function(lastUpdate) {
+
+			if (!lastUpdated || lastUpdated < new Date(lastUpdate.updateDate)) {
+				setCampaignsToCache(function() {
+					console.log('campaignsUpdatedToCached..............');
+					lastUpdated = new Date(lastUpdate.updateDate);
+				});
+			}
+		});
+	};
+
+	return {
+
+		setCampaignsToCache: setCampaignsToCache,
+		updateCacheIfNeeded: updateCacheIfNeeded,
 		getCampaign: function(key) {
 			return cacheManager.getValue(key);
 		}

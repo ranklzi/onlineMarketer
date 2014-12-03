@@ -14,6 +14,7 @@ module.exports = function(app) {
   app.use('/api/campaigns', require('./api/campaign'));
   app.use('/serve', require('./api/serve'));
   app.use('/conversion', require('./api/conversion'));
+  app.use('/applicationCache', require('./api/cache'));
 
   app.use('/auth', require('./auth'));
   app.use(cookieParser());

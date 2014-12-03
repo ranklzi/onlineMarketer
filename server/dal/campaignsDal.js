@@ -99,8 +99,7 @@ exports.getCampaignsStats = function (done) {
 
 exports.getOffersWithCampaignsData = function (done) {
   pg.connect(config.postreg.connectionString, function(err, client) {
-    if(err) {
-      client.end();
+    if(err) {      
       return console.error('error fetching client from pool', err);
     }
 

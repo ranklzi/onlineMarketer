@@ -32,6 +32,11 @@ applicationCacheManager.setCampaignsToCache(function() {
 	});
 });
 
+setInterval(function () {
+	console.log('intervall executedddddddddddddd');
+	applicationCacheManager.updateCacheIfNeeded();
+}, 3000);
+
 
 // Expose app
 exports = module.exports = app;

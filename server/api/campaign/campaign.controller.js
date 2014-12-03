@@ -12,6 +12,7 @@
 var _ = require('lodash');
 var services = require('../../services');
 var campaignsDal = require('../../dal/campaignsDal');
+var updatesStatusDal = require('../../dal/updatesStatusDal').updatesStatusDal;
 
 // Get the list of Campaigns
 exports.index = function(req, res) {
@@ -40,25 +41,41 @@ exports.create = function(req, res) {
 
   campaignsDal.createCampaign(req.body, function(err, campaign) {
     if(err) { return handleError(res, err); }
-    return res.json(201, campaign);
+
+    updatesStatusDal.update(new Date(), 1, function(err1) {
+      if(err1) { return handleError(res, err1); }
+
+      return res.json(200);
+
+    });
   });
 };
 
 // Updates an existing campaign in the DB.
 exports.update = function(req, res) {
   if(req.body.id) { delete req.body.id; }
-  campaignsDal.updateCampaign(req.params.id, req.body, function(err, campaign) {
-    if(err) { return handleError(res, err); }
+  campaignsDal.updateCampaign(req.params.id, req.body, function(campaign) {
+    //if(err) { return handleError(res, err); }
+    
+    updatesStatusDal.update(new Date(), 1, function(err1) {
+      if(err1) { return handleError(res, err1); }
 
-    return res.json(201, campaign);
+      return res.json(201, campaign);
+
+    });
   });
 };
 
 // Deletes a campaign from the DB.
 exports.destroy = function(req, res) {
   campaignsDal.deleteCampaign(req.params.id, function(err, campaign) {
-    if(err) { return handleError(res, err); }
-    return res.json(201);
+    //if(err) { return handleError(res, err); }
+
+    updatesStatusDal.update(new Date(), 1, function(err1) {
+      if(err1) { return handleError(res, err1); }
+
+      return res.json(201);
+    });
   });
 };
 function handleError(res, err) {
