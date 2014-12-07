@@ -13,11 +13,15 @@ var _ = require('lodash');
 var services = require('../../services');
 var campaignsDal = require('../../dal/campaignsDal');
 var updatesStatusDal = require('../../dal/updatesStatusDal').updatesStatusDal;
+var url = require('url');
 
 // Get the list of Campaigns
 exports.index = function(req, res) {
-  campaignsDal.getCampaignsStats(function (campaigns) {    
-    if(!campaigns) { return res.send(404); }
+
+  var queryData = url.parse(req.url, true).query;
+
+  campaignsDal.getCampaignsStats(queryData.from, queryData.to, function (campaigns) {    
+    if(!campaigns) { return res.send(200); }
 
     //console.log(campaigns);
 

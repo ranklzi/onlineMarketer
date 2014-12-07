@@ -68,7 +68,7 @@ exports.getCampaignByKey = function (key, done) {
   });
 }
 
-exports.getCampaignsStats = function (done) {
+exports.getCampaignsStats = function (from, to, done) {
   pg.connect(config.postreg.connectionString, function(err, client) {
     if(err) {
       client.end();
@@ -78,11 +78,16 @@ exports.getCampaignsStats = function (done) {
     var query = 'SELECT campaigns.id, campaigns.name, campaigns."defaultCpc", ' + 
       'COUNT(clicks.id) as clicks, SUM(CASE WHEN clicks.conversion = TRUE THEN 1 ELSE 0 END) as conversions, ' + 
       'SUM(clicks."cpcRate") as spent ' + //, SUM(offers."payOut") as revenue ' + 
-      'FROM campaigns LEFT OUTER JOIN offers ON campaigns.id = offers."campaignId" ' +
-      'LEFT OUTER JOIN clicks ON offers.id = clicks."offerId" GROUP BY campaigns.id;';
+      'FROM clicks INNER JOIN offers ON clicks."offerId" = offers.id ' +
+      'INNER JOIN campaigns ON offers."campaignId" = campaigns.id ' +
+      'WHERE clicks."clickDateTime" BETWEEN $1 AND $2 ' +
+      'GROUP BY campaigns.id;';
+      
     
 
-    client.query(query, 
+    client.query(query,
+      [from, to],
+      //['2007-02-02 08:08:08', '2014-12-12 08:08:08'],
       function(err, result) {
 
       if(err) {

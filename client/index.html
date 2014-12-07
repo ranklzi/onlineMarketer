@@ -10,12 +10,13 @@
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/3.5.2/select2.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/3.5.2/select2.min.css">
     
     
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->
+      <link rel="stylesheet" href="bower_components/select2/select2.css" />
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->    
@@ -25,6 +26,7 @@
     <!-- endbuild -->
   </head>
   <body ng-app="onlineMarketerApp">
+  
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -78,11 +80,17 @@
           <script src="app/campaign/campaign.js"></script>
           <script src="app/campaigns/campaigns.controller.js"></script>
           <script src="app/campaigns/campaigns.js"></script>
+          <script src="app/generalViews/contextMenuCampaigns.controller.js"></script>
           <script src="app/main/main.controller.js"></script>
           <script src="app/main/main.js"></script>
           <script src="components/auth/auth.service.js"></script>
           <script src="components/auth/user.service.js"></script>
           <script src="components/campaigns/campaign.service.js"></script>
+          <script src="components/general/commonCookies.service.js"></script>
+          <script src="components/general/enums.service.js"></script>
+          <script src="components/general/resolutionType.service.js"></script>
+          <script src="components/general/timeframe.service.js"></script>
+          <script src="components/general/timezone.service.js"></script>
           <script src="components/modal/modal.service.js"></script>
           <script src="components/mongoose-error/mongoose-error.directive.js"></script>
           <script src="components/navbar/navbar.controller.js"></script>

@@ -23,6 +23,7 @@
     "angular-ui-select2": "~0.0.5"
   },
   "resolutions": {
-    "select2": "~3.5.2"
+    "select2": "~3.5.2",
+    "bootstrap": "~3.3.1"
   }
 }

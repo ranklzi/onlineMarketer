@@ -1,15 +1,17 @@
-div(ng-include='"components/navbar/navbar.html"')
-.container
-  div.container
-    div.row.list-group-item
-      div.col-xs-1
-        a(href="/campaign/new" class="btn btn-primary btn-sm")
-          span New Campaign&nbsp;
-          span(class="glyphicon glyphicon-plus")
+label.device-type
+div(ng-include='"components/navbar/navbar.html"')  
+.container  
+  div.container.input-panel
     div.row.list-group-item
       div.col-xs-2
+        a(href="/campaign/new" class="btn btn-primary btn-sm")
+          span New Campaign&nbsp;
+          span(class="glyphicon glyphicon-plus")        
+    div.row.list-group-item.hidden-mobile-narrow
+      div.col-xs-2
         span Campaign Status:
-        select(ui-select2="select2Options" ng-model="selectedCampaignStatus")
+        br
+        select(ui-select2="simpleSelectOptions" ng-model="selectedCampaignStatus")
           option(ng-repeat="campaignStatus in campaignStatuses" value="{{campaignStatus.value}}") {{campaignStatus.name}}
         //- select(select2="select2Options"
         //-    reset-search-input="false")
@@ -27,40 +29,63 @@ div(ng-include='"components/navbar/navbar.html"')
         span Traffic Source:
       div.col-xs-2
         span Date Range:
+        br
+        select(ui-select2="simpleSelectOptions" ng-model="selectedTimeFrame")
+          option(ng-repeat="timeframe in timeframes" value="{{timeframe.timeframeId}}") {{timeframe.name}}
+      div.col-xs-2(ng-show="selectedTimeFrame == 10")
+        span Dates:
+        br
+        span
+          input(type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" 
+            is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" 
+            date-disabled="disabled(date, mode)" ng-required="true" close-text="Close")
+          span(class="input-group-btn")
+            button(type="button" class="btn btn-default" ng-click="open($event)")
+              i(class="glyphicon glyphicon-calendar")
       div.col-xs-2
         span Stats Timezone:
+        br
+        select(ui-select2="simpleSelectOptions" ng-model="selectedTimeZone")
+          option(ng-repeat="timezone in timezones" value="{{timezone.timezoneId}}") GMT {{timezone.gmt}} - {{timezone.name}} 
+    div.row.list-group-item.hidden-mobile-narrow
+      div.col-xs-2
+        button(type="button" class="btn btn-primary" ng-click="refresh()") Refresh
+        
   div.container
     div.row.list-group-item
-      div.col-xs-1
-        strong Id
-      div.col-xs-2
+      //- div.col-xs-1.col-md-1.hidden-mobile-narrow
+      div.col-xs-1.col-md-1.hidden-mobile-narrow
+        strong Id        
+      div.col-xs-4.col-md-2
         strong Name
-      div.col-xs-2
-      div.col-xs-1
+      div.col-xs-2.col-md-2.hidden-mobile-narrow
+      div.col-xs-2.col-md-1
         strong Clicks
-      div.col-xs-1
+      div.col-xs-2.col-md-1
         strong Leads
-      div.col-xs-1
+      div.col-md-1.hidden-mobile-narrow
         strong CPC
-      div.col-xs-1
+      div.col-md-1.hidden-mobile-narrow
         strong Spent
-      div.col-xs-1
+      div.col-md-1.hidden-mobile-narrow
         strong Revenue
-      div.col-xs-1
-        strong Conversion Rate
-      div.col-xs-1
+      div.col-md-1.hidden-mobile-narrow
+        strong Conv Rate
+      div.col-xs-1.col-md-1
         strong P/L
-      div.col-xs-1
-        strong ROI
-    div.row.list-group-item(ng-repeat='campaign in users')
-      div.col-xs-1 {{campaign.id}}
-      div.col-xs-2 {{campaign.name}}
-      div.col-xs-2
+      //- div.col-xs-1.hidden-mobile-narrow
+      //-   strong ROI
+    div.row.list-group-item(ng-repeat='campaign in campaigns' data-toggle="modal" data-target=".row-context-menu" ng-click="clickCampaignRow(campaign)")
+      div.col-xs-1.col-md-1.hidden-mobile-narrow {{campaign.id}}
+      div.col-xs-4.col-md-2 {{campaign.name}}
+      div.col-xs-2.col-md-2.hidden-mobile-narrow
         span
           a(href="/campaign/{{campaign.id}}") Edit
           span  | 
           a(ng-click="delete(campaign)") Delete
-      div.col-xs-1 {{campaign.clicks}}
-      div.col-xs-1 {{campaign.conversions}}
-      div.col-xs-1 {{campaign.defaultCpc}}
-      div.col-xs-1 {{campaign.spent}}
+      div.col-xs-2.col-md-1 {{campaign.clicks}}
+      div.col-xs-2.col-md-1 {{campaign.conversions}}
+      div.col-md-1.hidden-mobile-narrow {{campaign.defaultCpc}}
+      //- div.col-xs-1.hidden-mobile-narrow {{campaign.spent}}
+
+

@@ -7,5 +7,5 @@ client/bower_components
 dist
 dist*
 log
-newrelic_agent.log
+newrelic_agent.log*
 /server/config/local.env.js

@@ -6,7 +6,8 @@ angular.module('onlineMarketerApp', [
   'ngSanitize',
   'ui.router',
   'ui.bootstrap',
-  'ui.select2'
+  'ui.select2',
+  'ui.bootstrap.modal'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider

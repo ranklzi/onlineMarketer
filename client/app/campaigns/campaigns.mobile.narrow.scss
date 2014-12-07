@@ -1,0 +1,14 @@
+@media only screen and (min-width : 300px) and (max-width : 500px) {
+
+	label.device-type:after {
+		content: "Mobile Narrow";
+	};
+	.input-panel, 
+	.form-control
+	 {
+		font-size: 0.9em;
+	}
+	.hidden-mobile-narrow {
+		display: none;
+	}
+}

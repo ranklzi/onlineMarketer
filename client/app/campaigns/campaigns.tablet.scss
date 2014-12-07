@@ -1,0 +1,11 @@
+@media only screen and (min-width : 800px) and (max-width : 1200px) {
+
+	label.device-type:after {
+		content: "Tablet";
+	};
+	.input-panel, 
+	.form-control
+	 {
+		font-size: 0.9em;
+	}
+}

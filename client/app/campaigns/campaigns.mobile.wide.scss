@@ -1,0 +1,11 @@
+@media only screen and (min-width : 500px) and (max-width : 800px) {
+
+	label.device-type:after {
+		content: "Mobile Wide";
+	};
+	.input-panel, 
+	.form-control
+	 {
+		font-size: 0.9em;
+	}
+}

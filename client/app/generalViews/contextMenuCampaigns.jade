@@ -1,0 +1,17 @@
+div.modal-dialog
+	div.modal-content
+		div.modal-body
+			button(type="button" class="close" data-dismiss="modal")
+				span(aria-hidden="true") &times;
+				span(class="sr-only") Close
+			ul.list-unstyled.list-float
+				li
+					button(type="button" class="btn btn-primary") Stats
+				li
+					button(type="button" ng-click="editClick()" class="btn btn-primary") Edit
+				li
+					button(type="button" class="btn btn-primary") Clone
+				li
+					button(type="button" class="btn btn-danger") Reset
+				li
+					button(type="button" class="btn btn-danger") Delete
